@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="http://backend.com/soap/web/users">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:deleteUserRequest>
+            <gs:login>alex</gs:login>
+        </gs:deleteUserRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

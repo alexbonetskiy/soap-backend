@@ -1,0 +1,21 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="http://backend.com/soap/web/users">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:addUserRequest>
+            <gs:userTO>
+                <gs:name></gs:name>
+                <gs:login></gs:login>
+                <gs:password></gs:password>
+                <gs:role>
+                    <gs:id>1</gs:id>
+                    <gs:name>Operator</gs:name>
+                </gs:role>
+                <gs:role>
+                    <gs:id>3</gs:id>
+                    <gs:name>Engineer</gs:name>
+                </gs:role>
+            </gs:userTO>
+        </gs:addUserRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

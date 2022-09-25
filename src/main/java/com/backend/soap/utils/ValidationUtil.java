@@ -20,8 +20,7 @@ public class ValidationUtil {
         }
         if (StringUtils.isBlank(userTO.getPassword())) {
             result.add("Enter user password");
-        }
-        if (!userTO.getPassword().matches("^(?=.*[A-Z])(?=.*[0-9]).*$")) {
+        } else if (!userTO.getPassword().matches("^(?=.*[A-Z])(?=.*[0-9]).*$")) {
             result.add("Password must contain one capital letter and one digit at least");
         }
         return result;

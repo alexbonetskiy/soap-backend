@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "roles_unique_name_idx")})
+@Table(name = "roles")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,6 +23,7 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
+    @Column(nullable = false, updatable = false, unique = true)
     String name;
 
     @Override

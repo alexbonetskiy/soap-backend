@@ -8,9 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -23,16 +21,19 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(updatable = false)
     String login;
 
+    @Column(nullable = false)
     String name;
 
+    @Column(nullable = false)
     String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name =
             "login"), inverseJoinColumns = @JoinColumn(name = "id"))
-    Set<Role> roles = new HashSet<>();
+    List<Role> roles = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
