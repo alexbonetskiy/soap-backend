@@ -1,10 +1,10 @@
 INSERT INTO USERS (NAME, LOGIN, PASSWORD)
- VALUES ('User', 'user', 'user'),
-        ('Admin', 'admin', 'admin');
+ VALUES ('Peter', 'peter', 'Peter1'),
+        ('Andrew', 'andrew', 'Andrew3');
 
-INSERT INTO ROLES (ID, NAME)
- VALUES (1, 'User'),
-        (2, 'Admin');
+INSERT INTO ROLES  (NAME)
+ VALUES ('User'),
+        ('Admin');
 
 
 INSERT INTO USER_ROLES (LOGIN, ID)

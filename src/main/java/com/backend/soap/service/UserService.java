@@ -33,4 +33,14 @@ public class UserService {
         log.info("deleteUser");
         return userRepository.delete(login);
     }
+
+    public void addUser(UserTO userTO) {
+        log.info("addUser {}", userTO);
+        userRepository.save(UserMapper.USER_MAPPER.user(userTO));
+    }
+
+    public void updateUser(UserTO userTO) {
+        log.info("updateUser {}", userTO);
+        userRepository.save(UserMapper.USER_MAPPER.user(userTO));
+    }
 }

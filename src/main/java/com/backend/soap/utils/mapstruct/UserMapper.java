@@ -21,6 +21,9 @@ public interface UserMapper {
     @Mapping(source = "roles", target = "role")
     UserTO userTO(User user);
 
+    @Mapping(source = "role", target = "roles")
+    User user(UserTO userTO);
+
     List<RoleTO> roleTOList(List<Role> roles);
 
     RoleTO roleTO(Role order);

@@ -1,6 +1,5 @@
 package com.backend.soap.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,9 +7,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = { "id", "name"}, name = "roles_unique_id_name_idx")})
+@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "roles_unique_name_idx")})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,4 +25,23 @@ public class Role implements Serializable {
 
     String name;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (! (o instanceof Role role)) return false;
+        return name.equals(role.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
