@@ -5,16 +5,20 @@ import com.backend.soap.domain.User;
 import com.backend.soap.repository.RoleRepository;
 import com.backend.soap.repository.UserRepository;
 import com.backend.soap.utils.mapstruct.UserMapper;
+import com.backend.soap.web.users.RequestStatus;
 import com.backend.soap.web.users.UserTO;
 import com.backend.soap.web.users.UserTOWithoutRoles;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.backend.soap.utils.ValidationUtil.validateUserTOForAdding;
+import static com.backend.soap.utils.ValidationUtil.validateUserTOForUpdating;
 
 @RequiredArgsConstructor
 @Service
@@ -36,38 +40,59 @@ public class UserService {
     }
 
 
-    public int deleteUser(String login) {
-        log.info("deleteUser");
-        return userRepository.delete(login);
+    public RequestStatus deleteUser(String login) {
+        RequestStatus requestStatus = new RequestStatus();
+        if (userRepository.delete(login) == 0) {
+            requestStatus.setErrors("Such user doesn't exist");
+            return requestStatus;
+        }
+        log.info("deleteUser {}", login);
+        requestStatus.setSuccess(true);
+        return requestStatus;
     }
 
-    public void addUser(UserTO userTO) {
-        User user = userRepository.findByLogin(userTO.getLogin());
-        Assert.isNull(user, "User with such login already exist");
-        List<Role> roles = verifyRoles(userTO);
+    public RequestStatus addUser(UserTO userTO) {
+        RequestStatus requestStatus = createRequestStatus(validateUserTOForAdding(userTO, userRepository, roleRepository));
+        if (!requestStatus.isSuccess()) {
+            return requestStatus;
+        }
         log.info("addUser {}", userTO);
-        user = UserMapper.USER_MAPPER.user(userTO);
-        user.setRoles(roles);
-        userRepository.save(user);
+        saveUser(userTO);
+        return requestStatus;
     }
 
-    public void updateUser(UserTO userTO) {
-        User user = userRepository.findByLogin(userTO.getLogin());
-        Assert.notNull(user, "User with such login doesn't exist");
-        List<Role> roles = verifyRoles(userTO);
+    public RequestStatus updateUser(UserTO userTO) {
+        RequestStatus requestStatus = createRequestStatus(validateUserTOForUpdating(userTO, userRepository, roleRepository));
+        if (!requestStatus.isSuccess()) {
+            return requestStatus;
+        }
         log.info("updateUser {}", userTO);
-        user = UserMapper.USER_MAPPER.user(userTO);
-        user.setRoles(roles);
+        saveUser(userTO);
+        return requestStatus;
+    }
+
+    public void saveUser(UserTO userTO) {
+        User user = UserMapper.USER_MAPPER.user(userTO);
+        user.setRoles(getRolesFromTO(userTO));
         userRepository.save(user);
     }
 
-    public List<Role> verifyRoles(UserTO userTO) {
+    public List<Role> getRolesFromTO(UserTO userTO) {
         List<Role> roles = new ArrayList<>();
         for (String roleName : userTO.getRole()) {
             Role role = roleRepository.findByName(roleName);
-            Assert.notNull(role, roleName + " role doesn't exist");
             roles.add(role);
         }
         return roles;
+    }
+
+    public RequestStatus createRequestStatus(List<String> errors) {
+        RequestStatus requestStatus = new RequestStatus();
+        if (!errors.isEmpty()) {
+            requestStatus.setErrors(StringUtils.join(errors, ", "));
+            return requestStatus;
+        }
+        requestStatus.setSuccess(true);
+        return requestStatus;
     }
 }

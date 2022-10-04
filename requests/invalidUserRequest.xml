@@ -5,9 +5,9 @@
         <gs:addUserRequest>
             <gs:userTO>
                 <gs:name></gs:name>
-                <gs:login></gs:login>
+                <gs:login>Peter</gs:login>
                 <gs:password></gs:password>
-                <gs:role>Operator</gs:role>
+                <gs:role>Operatorr</gs:role>
                 <gs:role>Engineer</gs:role>
             </gs:userTO>
         </gs:addUserRequest>
