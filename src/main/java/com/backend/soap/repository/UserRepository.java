@@ -16,5 +16,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     int delete(String login);
 
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.login=:login")
-    Optional<User> findByIdWithRoles(String login);
+    Optional<User> findByLoginWithRoles(String login);
+
+    User findByLogin(String login);
 }

@@ -9,14 +9,7 @@
             <xs:element name="name" type="xs:string"/>
             <xs:element name="login" type="xs:string"/>
             <xs:element name="password" type="xs:string"/>
-            <xs:element name="role" type="tns:roleTO"  maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="roleTO">
-        <xs:sequence>
-            <xs:element name="id" type="xs:positiveInteger"/>
-            <xs:element name="name" type="xs:string"/>
+            <xs:element name="role" type="xs:string"  maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
