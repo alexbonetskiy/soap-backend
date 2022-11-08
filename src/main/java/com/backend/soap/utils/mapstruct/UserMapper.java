@@ -2,8 +2,9 @@ package com.backend.soap.utils.mapstruct;
 
 import com.backend.soap.domain.Role;
 import com.backend.soap.domain.User;
-import com.backend.soap.web.users.UserTO;
-import com.backend.soap.web.users.UserTOWithoutRoles;
+
+import com.backend.soap.dto.UserTO;
+import com.backend.soap.dto.UserTOWithoutRoles;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

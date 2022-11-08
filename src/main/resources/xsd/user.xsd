@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="http://backend.com/soap/web/users"
-           targetNamespace="http://backend.com/soap/web/users"
+           xmlns:tns="http://backend.com/soap/dto"
+           targetNamespace="http://backend.com/soap/dto"
            elementFormDefault="qualified">
 
 
@@ -24,7 +24,7 @@
     <xs:complexType name="requestStatus">
         <xs:sequence>
             <xs:element name="success" type="xs:boolean"/>
-            <xs:element name="errors" type= "xs:string" minOccurs="0"/>
+            <xs:element name="errors" type= "xs:string" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 

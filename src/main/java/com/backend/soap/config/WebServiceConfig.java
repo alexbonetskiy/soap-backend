@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
-import org.springframework.ws.server.EndpointExceptionResolver;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -29,7 +28,7 @@ public class WebServiceConfig {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("UsersPort");
         wsdl11Definition.setLocationUri("/users");
-        wsdl11Definition.setTargetNamespace("http://backend.com/soap/web/users");
+        wsdl11Definition.setTargetNamespace("http://backend.com/soap/dto");
         wsdl11Definition.setSchema(userSchema);
         return wsdl11Definition;
     }

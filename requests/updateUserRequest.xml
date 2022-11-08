@@ -1,5 +1,5 @@
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-                  xmlns:gs="http://backend.com/soap/web/users">
+                  xmlns:gs="http://backend.com/soap/dto">
     <soapenv:Header/>
     <soapenv:Body>
         <gs:updateUserRequest>

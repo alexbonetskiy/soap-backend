@@ -1,4 +1,5 @@
 The task is:
+
 Необходимо разработать SOAP backend для веб-приложения. Основная задача бекенда - управление пользователями и их ролями. Описание модели данных:
 
 У пользователя может быть несколько ролей, одна роль может быть у нескольких пользователей. Например, Вася - Админ и Оператор, Петя - Оператор и Аналитик.
@@ -30,7 +31,7 @@ Get user:
 
 Get all users:
 
- curl --header "Content-Type: text/xml;charset=UTF-8" -d @requests/getAllUsersRequest.xml  http://localhost:8080/users | xmllint --format -
+curl --header "Content-Type: text/xml;charset=UTF-8" -d @requests/getAllUsersRequest.xml  http://localhost:8080/users | xmllint --format -
 
 Update user:
 
